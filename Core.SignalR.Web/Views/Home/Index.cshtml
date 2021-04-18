@@ -11,6 +11,7 @@
 
             var connection = new signalR.HubConnectionBuilder()
                 .configureLogging(signalR.LogLevel.Information)
+                .withAutomaticReconnect([1000, 1000, 1000, 1000])
                 .withUrl("https://localhost:44396/MyHub").build();
 
             $('#conStatus').text(connection.connectionState);
@@ -18,6 +19,7 @@
             connection.start()
                 .then(() => {
 
+                    $('#loading').hide();
                     $('#conStatus').text(connection.connectionState);
 
                 })
@@ -26,6 +28,27 @@
                 });
 
             $('#conStatus').text(connection.connectionState);
+
+            //bağnatı koptuğunda 1 kez tetiklenir ve 0, 2, 3, 10 sn 
+            //olarak tekrar bağlanmayı denerler
+            connection.onreconnecting(err => {
+                $('#loading').show();
+                $('#conStatus').text(connection.connectionState);
+                console.log("onreconnection : " + err);
+            });
+
+            //bağnatı tekrar sağlandığında tetiklenir
+            connection.onreconnected(connectionId => {
+                $('#loading').hide();
+                $('#conStatus').text(connection.connectionState);
+                console.log("connectionId : " + connectionId);
+            });
+
+            //bağlantı denemeler sonucunda bağlantı kurulamadığında tetiklenir
+            connection.onclose(() => {
+                $('#loading').hide();
+                $('#conStatus').text(connection.connectionState);
+            });
 
             $('#btnNameSave').click(() => {
 
@@ -56,7 +79,15 @@
         <hr />
         <button class="btn btn-primary" id="btnNameSave">İsim Kaydet</button>
         <div class="alert alert-info my-2">
-            Bağlantı Durumu : <strong id="conStatus"></strong>
+            <div class="float-left">
+                Bağlantı Durumu : <strong id="conStatus"></strong>
+            </div>
+            <div class="float-right">
+                <div id="loading" class="spinner-border" role="status">
+                    <span class="visually-hidden"></span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
     <div class="col-md-8 offset-2">
