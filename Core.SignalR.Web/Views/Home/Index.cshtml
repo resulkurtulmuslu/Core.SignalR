@@ -38,7 +38,7 @@
             statusShow();
             start();
 
-            //bağnatı koptuğunda 1 kez tetiklenir ve 0, 2, 3, 10 sn 
+            //bağnatı koptuğunda 1 kez tetiklenir ve 0, 2, 3, 10 sn
             //olarak tekrar bağlanmayı denerler
             connection.onreconnecting(err => {
                 $('#loading').show();
@@ -82,6 +82,10 @@
             connection.on("ReceiveClientCount", (count) => {
                 $('#clientCount').text(count);
             });
+
+            connection.on("Notify", (countText) => {
+                $('#notify').html("<div class='alert alert-warning'>" + countText + "</div>");
+            });
         });
 
     </script>
@@ -105,6 +109,7 @@
             </div>
             <div class="clearfix"></div>
         </div>
+        <div id="notify"></div>
     </div>
     <div class="col-md-8 offset-2">
         <ul class="list-group" id="nameList">

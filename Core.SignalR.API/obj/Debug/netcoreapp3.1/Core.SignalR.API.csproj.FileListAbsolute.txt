@@ -17,3 +17,4 @@ D:\GitHub\Core.SignalR\Core.SignalR\Core.SignalR.API\obj\Debug\netcoreapp3.1\Cor
 D:\GitHub\Core.SignalR\Core.SignalR\Core.SignalR.API\obj\Debug\netcoreapp3.1\Core.SignalR.API.dll
 D:\GitHub\Core.SignalR\Core.SignalR\Core.SignalR.API\obj\Debug\netcoreapp3.1\Core.SignalR.API.pdb
 D:\GitHub\Core.SignalR\Core.SignalR\Core.SignalR.API\obj\Debug\netcoreapp3.1\Core.SignalR.API.genruntimeconfig.cache
+D:\GitHub\Core.SignalR\Core.SignalR\Core.SignalR.API\obj\Debug\netcoreapp3.1\Core.SignalR.API.csprojAssemblyReference.cache
