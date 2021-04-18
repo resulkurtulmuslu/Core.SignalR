@@ -14,40 +14,51 @@
                 .withAutomaticReconnect([1000, 1000, 1000, 1000])
                 .withUrl("https://localhost:44396/MyHub").build();
 
-            $('#conStatus').text(connection.connectionState);
+            function statusShow() {
+                $('#conStatus').text(connection.connectionState);
+            }
 
-            connection.start()
-                .then(() => {
+            function start() {
 
-                    $('#loading').hide();
-                    $('#conStatus').text(connection.connectionState);
+                statusShow();
 
-                })
-                .catch((err) => {
-                    console.log(err)
-                });
+                connection.start()
+                    .then(() => {
 
-            $('#conStatus').text(connection.connectionState);
+                        $('#loading').hide();
+                        statusShow();
+
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        setTimeout(() => start(), 2000);
+                    });
+            }
+
+            statusShow();
+            start();
 
             //bağnatı koptuğunda 1 kez tetiklenir ve 0, 2, 3, 10 sn 
             //olarak tekrar bağlanmayı denerler
             connection.onreconnecting(err => {
                 $('#loading').show();
-                $('#conStatus').text(connection.connectionState);
+                statusShow();
                 console.log("onreconnection : " + err);
             });
 
             //bağnatı tekrar sağlandığında tetiklenir
             connection.onreconnected(connectionId => {
                 $('#loading').hide();
-                $('#conStatus').text(connection.connectionState);
+                statusShow();
                 console.log("connectionId : " + connectionId);
             });
 
             //bağlantı denemeler sonucunda bağlantı kurulamadığında tetiklenir
             connection.onclose(() => {
                 $('#loading').hide();
-                $('#conStatus').text(connection.connectionState);
+                statusShow();
+
+                start();
             });
 
             $('#btnNameSave').click(() => {
