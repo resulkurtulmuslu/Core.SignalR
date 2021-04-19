@@ -23,6 +23,11 @@ namespace Core.SignalR.API.Hubs
 
         public static int TeamCount { get; set; } = 7;
 
+        public async Task SendProduct(Product p)
+        {
+            await Clients.All.SendAsync("ReceiveProduct", p);
+        }
+
         public async Task SendName(string name)
         {
             if (Names.Count >= TeamCount)

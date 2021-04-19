@@ -58,3 +58,4 @@ D:\GitHub\Core.SignalR\Core.SignalR\Core.SignalR.API\bin\Debug\netcoreapp3.1\run
 D:\GitHub\Core.SignalR\Core.SignalR\Core.SignalR.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\GitHub\Core.SignalR\Core.SignalR\Core.SignalR.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\GitHub\Core.SignalR\Core.SignalR\Core.SignalR.API\obj\Debug\netcoreapp3.1\Core.SignalR.API.csproj.CopyComplete
+D:\GitHub\Core.SignalR\Core.SignalR\Core.SignalR.API\obj\Debug\netcoreapp3.1\Core.SignalR.API.csprojAssemblyReference.cache
