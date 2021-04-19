@@ -124,6 +124,11 @@
 
             $('#btnNameSave').click(() => {
 
+                if (name == null) {
+                    alert("Kullanıcı ismi giriniz");
+                    return;
+                }
+
                 connection.invoke("SendName", $('#txtName').val())
                     .then(() => {
 
@@ -138,6 +143,16 @@
 
                 let name = $('#txtName').val();
                 let teamName = $('input[type=radio]:checked').val();
+
+                if (name == null) {
+                    alert("Kullanıcı ismi giriniz");
+                    return;
+                }
+
+                if (teamName == null) {
+                    alert("Takım seçiniz");
+                    return;
+                }
 
                 //console.log(teamName);
 
@@ -204,10 +219,12 @@
     <div class="col-md-8 offset-md-2">
         <div class="row">
             <div class="col-md-6">
+                <h3>A Takımı</h3>
                 <ul class="list-group" id="ATeamList">
                 </ul>
             </div>
             <div class="col-md-6">
+                <h3>B Takımı</h3>
                 <ul class="list-group" id="BTeamList">
                 </ul>
             </div>
