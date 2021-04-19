@@ -28,6 +28,8 @@
                         $('#loading').hide();
                         statusShow();
 
+                        connection.invoke("GetNames");
+
                     })
                     .catch((err) => {
                         console.log(err);
@@ -79,12 +81,26 @@
                 $('#nameList').append("<li class='list-group-item'>" + name + "</li>");
             });
 
+            connection.on("ReceiveNames", (names) => {
+                //console.log(name);
+
+                $('#nameList').empty();
+
+                names.forEach((item, index) => {
+                    $('#nameList').append("<li class='list-group-item'>" + item + "</li>");
+                });
+            });
+
             connection.on("ReceiveClientCount", (count) => {
                 $('#clientCount').text(count);
             });
 
             connection.on("Notify", (countText) => {
                 $('#notify').html("<div class='alert alert-warning'>" + countText + "</div>");
+            });
+
+            connection.on("Error", (errr) => {
+                $('#error').html("<div class='alert alert-danger'>" + errr + "</div>");
             });
         });
 
@@ -110,6 +126,7 @@
             <div class="clearfix"></div>
         </div>
         <div id="notify"></div>
+        <div id="error"></div>
     </div>
     <div class="col-md-8 offset-2">
         <ul class="list-group" id="nameList">
